@@ -1,0 +1,15 @@
+name = "wenjie-site-analytics"
+main = "src/index.js"
+compatibility_date = "2026-10-16"
+workers_dev = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "wenjie-site-analytics"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+[vars]
+ALLOWED_ORIGINS = "https://garios2.github.io,http://127.0.0.1:4173,http://localhost:4173"
+ALLOW_NULL_ORIGIN = "false"
+ALLOW_TEST_GEO = "false"
+MAX_PINS = "500"

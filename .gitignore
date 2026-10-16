@@ -1,0 +1,14 @@
+.DS_Store
+**/.env
+**/.env.*
+**/.dev.vars*
+**/wrangler.toml
+**/.wrangler/
+**/node_modules/
+*.log
+*.sqlite*
+*.db
+*.key
+*.pem
+*.p12
+*.pfx

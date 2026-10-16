@@ -1,38 +1,476 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Curriculum Vitae of Wenjie Zhou" />
-    <title>Wenjie Zhou | Curriculum Vitae</title>
-    <style>
-      :root {
-        color-scheme: light;
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: #f4f6f8;
-        color: #172033;
-      }
-      * { box-sizing: border-box; }
-      body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
-      header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.85rem 1.25rem; background: rgba(255, 255, 255, 0.96); border-bottom: 1px solid #dce2ea; }
-      h1 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.15rem, 3vw, 1.55rem); font-weight: 600; }
-      a { display: inline-flex; align-items: center; justify-content: center; min-height: 2.5rem; padding: 0.6rem 1rem; border-radius: 999px; background: #0b57d0; color: #fff; font-size: 0.9rem; font-weight: 650; text-decoration: none; }
-      a:hover { background: #0847ad; }
-      main { flex: 1; display: flex; padding: 1rem; }
-      .preview { display: block; width: min(100%, 66rem); min-height: 0; margin: 0 auto; padding: 0; border-radius: 0.75rem; background: transparent; }
-      .preview img { display: block; width: 100%; height: auto; border: 1px solid #dce2ea; border-radius: 0.75rem; background: #fff; box-shadow: 0 12px 35px rgba(21, 31, 50, 0.08); }
-      @media (max-width: 600px) { header { padding: 0.75rem; } main { padding: 0; } .preview img { border-radius: 0; } }
-    </style>
+    <meta
+      name="description"
+      content="Wenjie Zhou studies optimization, training dynamics, stability, scaling laws, and model merging for large-scale pre-training."
+    />
+    <meta name="theme-color" content="#f4f1ea" />
+    <!-- Set content to the deployed analytics Worker URL to enable the visitor map. -->
+    <meta name="visitor-api" content="" />
+    <meta property="og:title" content="Wenjie Zhou" />
+    <meta
+      property="og:description"
+      content="Research across optimization geometry, training dynamics, stability, and production-scale pre-training."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="assets/site-mark.svg" type="image/svg+xml" />
+    <link rel="preload" href="assets/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      (() => {
+        document.documentElement.classList.add("js");
+        let saved = null;
+        try {
+          saved = localStorage.getItem("theme");
+        } catch {
+          // Use the system preference when storage is unavailable.
+        }
+        const preferred = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.dataset.theme = saved || preferred;
+      })();
+    </script>
+    <script src="script.js" defer></script>
+    <title>Wenjie Zhou</title>
   </head>
   <body>
-    <header>
-      <h1>Wenjie Zhou · Curriculum Vitae</h1>
-      <a href="CV.pdf" download>Download PDF</a>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="nav-shell">
+        <a class="wordmark" href="#top" aria-label="Wenjie Zhou, home">
+          <span class="wordmark-mark">WZ</span>
+          <span class="wordmark-name">Wenjie Zhou</span>
+        </a>
+
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+          <span>Menu</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 8h16M4 16h16" />
+          </svg>
+        </button>
+
+        <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+          <a href="#experience">Experience</a>
+          <a href="#research">Research</a>
+          <a href="#publications">Publications</a>
+          <a href="CV.pdf" target="_blank" rel="noreferrer">CV <span aria-hidden="true">↗</span></a>
+          <button class="theme-toggle" type="button" aria-label="Switch color theme">
+            <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="3.5" />
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42" />
+            </svg>
+            <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7Z" />
+            </svg>
+          </button>
+        </nav>
+      </div>
     </header>
-    <main>
-      <a class="preview" href="CV.pdf" aria-label="Open the curriculum vitae as a PDF">
-        <img src="cv-preview.png" alt="Wenjie Zhou curriculum vitae" />
-      </a>
+
+    <main id="main">
+      <section class="hero shell" id="top" aria-labelledby="hero-title">
+        <div class="hero-copy reveal">
+          <h1 id="hero-title">Wenjie Zhou</h1>
+          <p class="hero-thesis">Making pre-training <em>predictable, stable,</em> and <em>efficient.</em></p>
+          <p class="hero-intro">
+            I am a Ph.D. candidate at the Institute of Computing Technology, Chinese Academy of Sciences,
+            and a research intern with the <a href="https://studio.dots.ai/" target="_blank" rel="noreferrer">RedNote Dots</a>
+            pre-training team. I study the geometry of optimization trajectories, the spectral dynamics behind
+            training phases, and the scaling rules that turn those mechanisms into reliable large-model recipes.
+          </p>
+          <div class="contact-row" aria-label="Contact links">
+            <a href="mailto:zj4323005@gmail.com">Email <span aria-hidden="true">↗</span></a>
+            <button class="text-link copy-contact" type="button" data-copy="13683429215">
+              WeChat <span aria-hidden="true">↗</span>
+            </button>
+            <a href="https://github.com/Garios2" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+            <a href="CV.pdf" target="_blank" rel="noreferrer">Curriculum Vitae <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+
+        <div class="hero-map reveal" aria-label="Research map: observe, explain, design, and scale">
+          <div class="map-topline">
+            <span>Research map</span>
+            <span>2023—now</span>
+          </div>
+          <svg class="signal-map" viewBox="0 0 520 310" role="img" aria-labelledby="map-title map-desc">
+            <title id="map-title">A research path from training signals to production scale</title>
+            <desc id="map-desc">Four connected stages labeled Observe, Explain, Design, and Scale.</desc>
+            <defs>
+              <linearGradient id="signal-gradient" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="var(--teal)" />
+                <stop offset="1" stop-color="var(--coral)" />
+              </linearGradient>
+            </defs>
+            <g class="map-grid">
+              <path d="M30 48H490M30 112H490M30 176H490M30 240H490" />
+              <path d="M96 24V272M208 24V272M320 24V272M432 24V272" />
+            </g>
+            <path class="map-curve map-curve-soft" d="M42 222C106 230 127 142 195 162S289 218 342 137S426 65 480 84" />
+            <path class="map-curve" d="M42 232C104 202 132 182 194 170S293 186 347 124S427 101 480 62" />
+            <g class="map-node">
+              <circle cx="70" cy="218" r="7" />
+              <text x="45" y="263">OBSERVE</text>
+            </g>
+            <g class="map-node">
+              <circle cx="198" cy="169" r="7" />
+              <text x="169" y="209">EXPLAIN</text>
+            </g>
+            <g class="map-node">
+              <circle cx="348" cy="124" r="7" />
+              <text x="322" y="165">DESIGN</text>
+            </g>
+            <g class="map-node map-node-accent">
+              <circle cx="480" cy="62" r="9" />
+              <text x="439" y="42">SCALE</text>
+            </g>
+          </svg>
+          <div class="map-caption">
+            <span>Dynamics</span>
+            <span>Geometry</span>
+            <span>Recipes</span>
+            <span>Production</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell" id="experience" aria-labelledby="experience-title">
+        <div class="section-heading reveal">
+          <p class="section-index">01 / Experience</p>
+          <h2 id="experience-title">Pre-training in practice.</h2>
+          <p>Research shaped by production constraints, from optimizer behavior to compute-aware scaling.</p>
+        </div>
+
+        <div class="experience-list">
+          <article class="experience-item reveal">
+            <a class="company-logo" href="https://studio.dots.ai/" target="_blank" rel="noreferrer" aria-label="Visit RedNote Dots">
+              <img src="assets/logos/rednote-dots.png" alt="RedNote Dots logo" width="96" height="96" />
+            </a>
+            <div class="experience-main">
+              <div class="experience-title-row">
+                <div>
+                  <h3><a href="https://studio.dots.ai/" target="_blank" rel="noreferrer">RedNote Dots</a></h3>
+                  <p class="role">Research Intern · RedStar / ACE Talent Program</p>
+                </div>
+                <p class="date"><span class="now">Now</span> Oct 2026 — Present</p>
+              </div>
+              <p class="experience-copy">
+                Contributing to a production-oriented overtraining scaling ladder for LLM pre-training—connecting
+                controlled small-model studies with reliable decisions at target-model scale.
+              </p>
+              <div class="tag-row" aria-label="Research areas">
+                <span>Overtraining</span><span>Scaling ladder</span><span>Production pre-training</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-item reveal">
+            <a class="company-logo logo-wide" href="https://hunyuan.tencent.com/" target="_blank" rel="noreferrer" aria-label="Visit Tencent Hunyuan">
+              <img src="assets/logos/tencent-hunyuan.svg" alt="Tencent Hunyuan logo" />
+            </a>
+            <div class="experience-main">
+              <div class="experience-title-row">
+                <div>
+                  <h3><a href="https://hunyuan.tencent.com/" target="_blank" rel="noreferrer">Tencent Hunyuan</a></h3>
+                  <p class="role">Research Intern · Qingyun Talent Program</p>
+                </div>
+                <p class="date">Apr — Oct 2026</p>
+              </div>
+              <p class="experience-copy">
+                Worked on production optimizers, training stability, and scaling laws. The work linked effective
+                learning-rate dynamics to transferable schedules and Hyperball optimizers.
+              </p>
+              <div class="tag-row" aria-label="Research areas">
+                <span>Optimizer design</span><span>Stability</span><span>Scaling laws</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-item reveal">
+            <a class="company-logo logo-wide" href="https://www.ant-ling.com/zh/" target="_blank" rel="noreferrer" aria-label="Visit Ant Ling">
+              <img src="assets/logos/ant-ling.svg" alt="Ant Ling logo" />
+            </a>
+            <div class="experience-main">
+              <div class="experience-title-row">
+                <div>
+                  <h3><a href="https://www.ant-ling.com/zh/" target="_blank" rel="noreferrer">Ant Group · BaiLing</a></h3>
+                  <p class="role">Research Intern · Pre-Training Algorithms Team</p>
+                </div>
+                <p class="date">Nov 2025 — Mar 2026</p>
+              </div>
+              <p class="experience-copy">
+                Worked on production pre-training optimizers and late-stage model merging, studying how the geometry
+                of training trajectories can be converted into cheaper improvements after training.
+              </p>
+              <div class="tag-row" aria-label="Research areas">
+                <span>Model merging</span><span>Trajectory geometry</span><span>Pre-training</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section shell" id="research" aria-labelledby="research-title">
+        <div class="section-heading section-heading-wide reveal">
+          <p class="section-index">02 / Research roadmap</p>
+          <h2 id="research-title">From first principles to training recipes.</h2>
+          <p>
+            I specialize in large language model pre-training, with a focus on optimization, training dynamics and
+            stability, scaling laws, and model merging. My work follows a consistent loop: identify structure in
+            large-scale training, explain it through optimization and spectral dynamics, then turn the mechanism into
+            a robust recipe that survives scale.
+          </p>
+        </div>
+
+        <ol class="roadmap reveal">
+          <li>
+            <div class="roadmap-number">01</div>
+            <h3>Read the dynamics</h3>
+            <p>Find the quantities that actually organize training: effective learning rate, sharpness, singular spectra, and checkpoint trajectories.</p>
+            <span>Signal → structure</span>
+          </li>
+          <li>
+            <div class="roadmap-number">02</div>
+            <h3>Design the geometry</h3>
+            <p>Use subspace structure to reason about Muon, Shampoo, momentum, and model merging—not as isolated tricks, but as geometric operators.</p>
+            <span>Structure → algorithm</span>
+          </li>
+          <li>
+            <div class="roadmap-number">03</div>
+            <h3>Make it scale</h3>
+            <p>Translate controlled experiments into stable schedules, optimizer choices, and overtraining ladders for production pre-training.</p>
+            <span>Algorithm → recipe</span>
+          </li>
+        </ol>
+      </section>
+
+      <section class="section shell publications-section" id="publications" aria-labelledby="publications-title">
+        <div class="section-heading reveal">
+          <p class="section-index">03 / Publications</p>
+          <h2 id="publications-title">Selected work.</h2>
+          <p>Seven projects across pre-training dynamics, optimizer geometry, and scalable training. <span class="legend">* equal contribution</span></p>
+        </div>
+
+        <div class="paper-list">
+          <article class="paper reveal">
+            <a class="paper-figure" href="https://hy.tencent.ai/research/elr" target="_blank" rel="noreferrer">
+              <img src="assets/papers/elr.svg" alt="Conceptual view of effective learning rate as a scale-transfer signal" />
+              <span class="figure-label">ELR view</span>
+            </a>
+            <div class="paper-body">
+              <div class="paper-meta"><span>Tencent Hy Research · 2026</span><span>Pre-training dynamics</span></div>
+              <h3><a href="https://hy.tencent.ai/research/elr" target="_blank" rel="noreferrer">From LR to ELR: A Better Heuristic for Pretraining Dynamics</a></h3>
+              <p class="authors">Zhanpeng Zhou*, <strong>Wenjie Zhou*</strong>, Yufei Gu*, Juqiu Wang, Guanwei Zhang, Ruobing Xie, Xianbiao Qi, Yushi Bai, Kaifeng Lyu, Shunyu Yao</p>
+              <p class="paper-brief">
+                Reframes the update scale through an effective learning rate that tracks angular parameter motion.
+                The signal predicts loss more consistently across width and depth and motivates a minus-square-root
+                schedule that transfers from speedruns to a 6B-MoE scaling ladder.
+              </p>
+              <div class="paper-links">
+                <a href="https://hy.tencent.ai/research/elr" target="_blank" rel="noreferrer">Official article ↗</a>
+                <a href="https://github.com/KellerJordan/modded-nanogpt/pull/343" target="_blank" rel="noreferrer">Experiment ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="paper reveal">
+            <a class="paper-figure" href="https://arxiv.org/abs/2605.26484" target="_blank" rel="noreferrer">
+              <img src="assets/papers/extra-merge.png" alt="Extra-Merge rank-1 trajectory geometry and empirical validation" loading="lazy" />
+              <span class="figure-label">Fig. 5</span>
+            </a>
+            <div class="paper-body">
+              <div class="paper-meta"><span>ICML 2026</span><span>Model merging</span></div>
+              <h3><a href="https://arxiv.org/abs/2605.26484" target="_blank" rel="noreferrer">Extra-Merge: Tracing the Rank-1 Subspace of Model Merging in Language Model Pre-Training</a></h3>
+              <p class="authors"><strong>Wenjie Zhou</strong>, Bohan Wang, Hongtao Zhang, Chenxi Jia, Wei Chen, Xueqi Cheng</p>
+              <p class="paper-brief">
+                Shows that late-stage merged checkpoints collapse onto a stable, nearly rank-1 flow even when raw
+                updates oscillate. Extra-Merge extrapolates along that direction—improving models without another
+                gradient step across GPT-2, LLaMA, Pythia-12B, and Muon settings.
+              </p>
+              <div class="paper-links">
+                <a href="https://arxiv.org/abs/2605.26484" target="_blank" rel="noreferrer">Paper ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="paper reveal">
+            <a class="paper-figure paper-figure-contain" href="https://arxiv.org/abs/2605.26489" target="_blank" rel="noreferrer">
+              <img src="assets/papers/singular-distribution.png" alt="Early stabilization of singular distributions aligned with two-phase loss dynamics" loading="lazy" />
+              <span class="figure-label">Fig. 1</span>
+            </a>
+            <div class="paper-body">
+              <div class="paper-meta"><span>ICML 2026</span><span>Spectral dynamics</span></div>
+              <h3><a href="https://arxiv.org/abs/2605.26489" target="_blank" rel="noreferrer">The Stability of Singular Distribution: A Spectral Perspective on the Two-Phase Dynamics of Language Model Pre-training</a></h3>
+              <p class="authors">Hongtao Zhang*, <strong>Wenjie Zhou*</strong>, Chenxi Jia, Wei Chen, Xueqi Cheng</p>
+              <p class="paper-brief">
+                Identifies Stability of Singular Distribution (SoSD): normalized singular spectra settle early, at
+                the same point that loss enters its slow phase. The effect persists across model families, schedules,
+                weight decay, and AdamW/Muon, giving a spectral explanation of two-phase training.
+              </p>
+              <div class="paper-links">
+                <a href="https://arxiv.org/abs/2605.26489" target="_blank" rel="noreferrer">Paper ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="paper reveal">
+            <a class="paper-figure paper-figure-contain" href="https://aclanthology.org/2025.emnlp-main.952/" target="_blank" rel="noreferrer">
+              <img src="assets/papers/bsfa.svg" alt="BSFA acceleration results across dominant and bulk update subspaces" loading="lazy" />
+              <span class="figure-label">Subspace view</span>
+            </a>
+            <div class="paper-body">
+              <div class="paper-meta"><span>EMNLP 2025 · Oral</span><span>Optimization</span></div>
+              <h3><a href="https://aclanthology.org/2025.emnlp-main.952/" target="_blank" rel="noreferrer">BSFA: Leveraging the Subspace Dichotomy to Accelerate Neural Network Training</a></h3>
+              <p class="authors"><strong>Wenjie Zhou*</strong>, Bohan Wang*, Wei Chen, Xueqi Cheng</p>
+              <p class="paper-brief">
+                Separates updates into a high-curvature dominant subspace and a descent-efficient bulk subspace, then
+                suppresses the former while amplifying the latter. A block-wise, history-based implementation acts as
+                a scalable optimizer plug-in and accelerates LLaMA pre-training.
+              </p>
+              <div class="paper-links">
+                <a href="https://aclanthology.org/2025.emnlp-main.952/" target="_blank" rel="noreferrer">Paper ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="paper reveal">
+            <a class="paper-figure paper-figure-contain" href="https://arxiv.org/abs/2605.08933" target="_blank" rel="noreferrer">
+              <img src="assets/papers/group-head-muon.png" alt="Validation-loss crossover between full-matrix and head-wise Muon" loading="lazy" />
+              <span class="figure-label">Fig. 1</span>
+            </a>
+            <div class="paper-body">
+              <div class="paper-meta"><span>ICML 2026 · HiLD</span><span>Muon</span></div>
+              <h3><a href="https://arxiv.org/abs/2605.08933" target="_blank" rel="noreferrer">When and Why Grouping Attention Heads Accelerates Muon Optimization</a></h3>
+              <p class="authors">Hongtao Zhang*, <strong>Wenjie Zhou*</strong>, Wei Chen, Xueqi Cheng</p>
+              <p class="paper-brief">
+                Explains why Muon’s best whitening granularity changes during training through a trade-off between
+                group-wise whitening gain and grouping-induced norm cost. Group Muon makes head grouping an optimizer
+                control and outperforms both full-QKV and fully head-wise variants.
+              </p>
+              <div class="paper-links">
+                <a href="https://arxiv.org/abs/2605.08933" target="_blank" rel="noreferrer">Paper ↗</a>
+                <a href="https://github.com/KellerJordan/modded-nanogpt/pull/253" target="_blank" rel="noreferrer">Implementation ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="paper reveal">
+            <a class="paper-figure paper-figure-contain" href="https://arxiv.org/abs/2610.08534" target="_blank" rel="noreferrer">
+              <img src="assets/papers/bregman-shampoo.png" alt="Overview of how Bregman divergence choices shape Shampoo preconditioning" loading="lazy" />
+              <span class="figure-label">Fig. 1</span>
+            </a>
+            <div class="paper-body">
+              <div class="paper-meta"><span>Under review · 2026</span><span>Shampoo</span></div>
+              <h3><a href="https://arxiv.org/abs/2610.08534" target="_blank" rel="noreferrer">How Bregman Divergences Shape Shampoo</a></h3>
+              <p class="authors">Bing Liu, <strong>Wenjie Zhou</strong>, Chengcheng Zhao, Hongtao Zhang, Boao Kong, Felix Dangel, Wu Lin</p>
+              <p class="paper-brief">
+                Builds a unified Bregman-divergence view of Shampoo’s Kronecker approximation. It shows how each
+                divergence redistributes spectral error and compensates differently for finite-sample bias, then
+                connects those choices to GPT-2 pre-training behavior.
+              </p>
+              <div class="paper-links">
+                <a href="https://arxiv.org/abs/2610.08534" target="_blank" rel="noreferrer">Paper ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="paper reveal">
+            <a class="paper-figure" href="https://arxiv.org/abs/2606.00542" target="_blank" rel="noreferrer">
+              <img src="assets/papers/bregman-rethinking.svg" alt="Spectral preferences of Frobenius, von Neumann, and LogDet divergences" loading="lazy" />
+              <span class="figure-label">Spectral view</span>
+            </a>
+            <div class="paper-body">
+              <div class="paper-meta"><span>ICML 2026 · HiLD</span><span>Kronecker geometry</span></div>
+              <h3><a href="https://arxiv.org/abs/2606.00542" target="_blank" rel="noreferrer">Rethinking Bregman Divergences in Kronecker-Factored Optimizers</a></h3>
+              <p class="authors">Bing Liu*, <strong>Wenjie Zhou*</strong>, Chengcheng Zhao</p>
+              <p class="paper-brief">
+                Characterizes how Frobenius, von Neumann, and LogDet divergences allocate unavoidable Kronecker error
+                across the covariance spectrum. The analysis motivates subspace-aware BregTop using the observed
+                alignment between Hessian and covariance top eigenspaces.
+              </p>
+              <div class="paper-links">
+                <a href="https://arxiv.org/abs/2606.00542" target="_blank" rel="noreferrer">Paper ↗</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="compact-projects shell" id="projects" aria-labelledby="projects-title">
+        <h2 class="section-index reveal" id="projects-title">04 / Open experiments</h2>
+        <div class="project-lines">
+          <a class="project-line reveal" href="https://github.com/KellerJordan/modded-nanogpt/pull/343" target="_blank" rel="noreferrer">
+            <strong>MuonH · minus-square-root schedule</strong>
+            <span>Track 3 SOTA · −75 steps</span>
+            <span class="project-link">Experiment ↗</span>
+          </a>
+          <a class="project-line reveal" href="https://github.com/KellerJordan/modded-nanogpt/pull/253" target="_blank" rel="noreferrer">
+            <strong>Group-Head Muon</strong>
+            <span>Stochastic head grouping for faster Muon</span>
+            <span class="project-link">Implementation ↗</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="contact-section" id="contact" aria-labelledby="contact-title">
+        <div class="shell contact-shell reveal">
+          <p class="section-index">05 / Contact</p>
+          <h2 id="contact-title">Let’s talk pre-training.</h2>
+          <p>I am always interested in clear empirical questions about optimization, training dynamics, and scale.</p>
+          <div class="contact-actions">
+            <a class="contact-primary" href="mailto:zj4323005@gmail.com">zj4323005@gmail.com <span aria-hidden="true">↗</span></a>
+            <a href="tel:+8613683429215">WeChat / Phone · +86 136 8342 9215</a>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-shell">
+        <div class="footer-inner">
+          <p>© <span id="year">2026</span> Wenjie Zhou</p>
+          <button class="visitor-toggle" id="visitor-toggle" type="button" aria-expanded="false" aria-controls="visitor-panel">
+            Thank you for visiting.
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>
+          </button>
+          <a href="#top">Back to top ↑</a>
+        </div>
+
+        <div class="visitor-panel" id="visitor-panel" aria-labelledby="visitor-toggle" hidden>
+          <div class="visitor-map-frame">
+            <svg class="visitor-map" viewBox="0 0 1000 500" role="img" aria-labelledby="visitor-map-title visitor-map-desc">
+              <title id="visitor-map-title">Visitor locations</title>
+              <desc id="visitor-map-desc">A map of coarse, anonymous locations derived from visits to this website.</desc>
+              <g class="visitor-graticule" aria-hidden="true">
+                <path d="M0 125H1000M0 250H1000M0 375H1000" />
+                <path d="M250 0V500M500 0V500M750 0V500" />
+              </g>
+              <g class="visitor-land" aria-hidden="true">
+                <path d="M52 112 80 69l57-35 93 12 41 35 69 20 24 43-36 28-28 62-56 38-22 55-43-13-18-62-46-18-28-48-55-18Z" />
+                <path d="m254 279 48 7 43 38 13 52-25 72-34 46-24-42 7-55-31-59Z" />
+                <path d="m420 113 35-26 50 5 24 25-21 24-47 3Z" />
+                <path d="m470 166 67-19 42 23 18 61-28 77-39 72-43-39-8-78-32-46Z" />
+                <path d="m523 91 74-31 111 8 69 31 103-10 70 39-32 41-77 10-39 34-62-2-43 45-72-22-44-53-54-21Z" />
+                <path d="m764 324 50-27 77 20 35 52-37 45-71-1-48-39Z" />
+                <path d="m307 23 39-15 38 18-23 41-48-5Z" />
+              </g>
+              <g class="visitor-pins" id="visitor-pins"></g>
+            </svg>
+            <p class="visitor-status" id="visitor-status">Visitor statistics will appear once the analytics endpoint is connected.</p>
+          </div>
+          <div class="visitor-total" aria-live="polite">
+            <strong id="visitor-total">—</strong>
+            <span>Total visits</span>
+          </div>
+          <p class="visitor-privacy">Coarse, anonymous location aggregation. Raw IP addresses are never stored or displayed.</p>
+        </div>
+      </div>
+    </footer>
+
+    <div class="toast" role="status" aria-live="polite">WeChat ID copied</div>
   </body>
 </html>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title id="title">Multiple limiting-sharpness regimes under momentum</title>
+  <desc id="desc">A schematic of momentum trajectories approaching several limiting sharpness levels below the maximum stable sharpness boundary.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef2ef"/>
+      <stop offset="1" stop-color="#f1ebe5"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="560" rx="28" fill="url(#bg)"/>
+  <g transform="translate(86 70)">
+    <path d="M0 390H790M0 0V390" fill="none" stroke="#1d2b31" stroke-width="2" opacity=".35"/>
+    <path d="M0 82H790" stroke="#b4513e" stroke-width="3" stroke-dasharray="11 10" opacity=".8"/>
+    <text x="598" y="65" font-family="Arial, sans-serif" font-size="14" fill="#b4513e">maximum stable sharpness</text>
+    <path d="M0 305C55 62 107 309 162 145S264 318 332 192S451 320 522 225S644 304 790 239" fill="none" stroke="#274b57" stroke-width="6" stroke-linecap="round"/>
+    <path d="M0 345C72 176 117 349 180 231S287 340 355 265S478 330 546 281S673 319 790 291" fill="none" stroke="#6c8d99" stroke-width="5" stroke-linecap="round" opacity=".92"/>
+    <path d="M0 261C55 104 105 254 165 178S278 266 345 206S456 266 528 220S664 257 790 229" fill="none" stroke="#c3944c" stroke-width="5" stroke-linecap="round" opacity=".92"/>
+    <circle cx="790" cy="239" r="8" fill="#274b57"/><circle cx="790" cy="291" r="8" fill="#6c8d99"/><circle cx="790" cy="229" r="8" fill="#c3944c"/>
+    <text x="-8" y="-18" font-family="Arial, sans-serif" font-size="15" fill="#1d2b31" opacity=".62">sharpness λ<tspan baseline-shift="sub" font-size="11">max</tspan></text>
+    <text x="700" y="430" font-family="Arial, sans-serif" font-size="15" fill="#1d2b31" opacity=".62">iterations →</text>
+  </g>
+</svg>
